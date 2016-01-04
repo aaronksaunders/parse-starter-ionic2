@@ -23,8 +23,8 @@ export class HomePage {
   onSubmit(value): void {
     console.log('you submitted value: ', value);
     if (value) {
-    this.authService.login(value.username, value.password);
-  }
+      this.authService.login(value.username, value.password);
+    }
   }
 
   onCreateAccount(value): void {
