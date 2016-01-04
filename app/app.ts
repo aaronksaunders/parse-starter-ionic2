@@ -1,5 +1,6 @@
 import {App, Platform} from 'ionic-framework/ionic';
 import {HomePage} from './pages/home/home';
+import {AuthService} from './services/AuthService';
 
 
 @App({
@@ -7,6 +8,7 @@ import {HomePage} from './pages/home/home';
     <ion-nav [root]="root"></ion-nav>
     <ion-overlay></ion-overlay>
   `,
+  providers: [AuthService]
 })
 export class MyApp {
   constructor(platform: Platform) {

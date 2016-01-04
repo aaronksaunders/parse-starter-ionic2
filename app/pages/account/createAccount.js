@@ -10,33 +10,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var ionic_1 = require('ionic-framework/ionic');
 var common_1 = require('angular2/common');
-var createAccount_1 = require('../account/createAccount');
-var AuthService_1 = require('../../services/AuthService');
-var HomePage = (function () {
-    function HomePage(nav, fb, authService) {
-        this.authService = authService;
+var CreateAccountPage = (function () {
+    function CreateAccountPage(nav, fb) {
         this.nav = nav;
         this.mainForm = fb.group({
+            firstName: [""],
+            lastName: [""],
             username: [""],
             password: [""]
         });
-        console.log("isLoggedIn", authService.isLoggedIn());
     }
-    HomePage.prototype.onSubmit = function (value) {
+    CreateAccountPage.prototype.onSubmit = function (value) {
         console.log('you submitted value: ', value);
-        if (value) {
-            this.authService.login(value.username, value.password);
-        }
     };
-    HomePage.prototype.onCreateAccount = function (value) {
-        this.nav.push(createAccount_1.CreateAccountPage, {});
+    CreateAccountPage.prototype.onCancel = function () {
+        console.log('you clicked cancel');
+        this.nav.pop();
     };
-    HomePage = __decorate([
+    CreateAccountPage = __decorate([
         ionic_1.Page({
-            templateUrl: 'build/pages/home/home.html',
+            templateUrl: 'build/pages/account/createAccount.html',
         }), 
-        __metadata('design:paramtypes', [ionic_1.NavController, common_1.FormBuilder, AuthService_1.AuthService])
-    ], HomePage);
-    return HomePage;
+        __metadata('design:paramtypes', [ionic_1.NavController, common_1.FormBuilder])
+    ], CreateAccountPage);
+    return CreateAccountPage;
 })();
-exports.HomePage = HomePage;
+exports.CreateAccountPage = CreateAccountPage;

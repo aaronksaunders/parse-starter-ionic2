@@ -12,7 +12,8 @@
     "inlineSources": false
   },
   "files": [
-    "app/app.ts"
+    "app/app.ts",
+    "app/services/AuthService.ts"
   ],
   "exclude": [
     "node_modules"
