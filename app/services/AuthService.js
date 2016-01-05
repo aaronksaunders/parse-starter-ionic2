@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,15 +8,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
+var http_1 = require('angular2/http');
+require('rxjs/add/operator/map');
 var AuthService = (function () {
-    function AuthService() {
+    function AuthService(http) {
+        this.http = http;
+        console.log('AuthService created.', http);
     }
     AuthService.prototype.login = function (user, password) {
-        if (user === 'user' && password === 'password') {
-            localStorage.setItem('username', user);
-            return true;
-        }
-        return false;
+        var headers = new http_1.Headers();
+        headers.append('x-parse-application-id', '');
+        headers.append('x-parse-rest-api-key', '');
+        var params = new http_1.URLSearchParams();
+        params.set('username', user);
+        params.set('password', password);
+        return this.http.get("https://api.parse.com/1/login", { headers: headers, search: params })
+            .map(function (responseData) { return responseData.json(); });
     };
     AuthService.prototype.isLoggedIn = function () {
         return this.getUser() !== null;
@@ -30,7 +36,7 @@ var AuthService = (function () {
     };
     AuthService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], AuthService);
     return AuthService;
 })();

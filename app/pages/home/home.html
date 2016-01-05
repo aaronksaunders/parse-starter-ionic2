@@ -6,7 +6,8 @@
 
 <ion-content class="home">
   <ion-card>
-    <ion-card-header>The Login Form</ion-card-header>
+    <ion-card-header>The Login Form: {{user?.username}}</ion-card-header>
+    <pre>{{err |json}}</pre>
     <form [ngFormModel]="mainForm" (submit)="onSubmit(mainForm.value)">
       <ion-list>
         <ion-input>

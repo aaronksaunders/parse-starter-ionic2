@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -23,9 +22,14 @@ var HomePage = (function () {
         console.log("isLoggedIn", authService.isLoggedIn());
     }
     HomePage.prototype.onSubmit = function (value) {
+        var _this = this;
         console.log('you submitted value: ', value);
         if (value) {
-            this.authService.login(value.username, value.password);
+            this.authService.login(value.username, value.password)
+                .subscribe(function (data) {
+                _this.user = data;
+                _this.err = undefined;
+            }, function (err) { return _this.err = "ERROR " + JSON.parse(err._body).error; }, function () { return console.log('User Login Success'); });
         }
     };
     HomePage.prototype.onCreateAccount = function (value) {
